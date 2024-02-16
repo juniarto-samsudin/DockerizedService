@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  deployment-proxy-geth:
+    image: keydonix/geth-clique
+    container_name: deployment-proxy-geth
+    ports:
+      - "8545:8545"
+    environment:
+      - GETH_VERBOSITY=3
+    command: 
+      --rpc, 
+      --rpcaddr "0.0.0.0", 
+      --rpcport 8545, 
+      --verbosity 3,
+      --ipcpath /geth/chain/geth.ipc

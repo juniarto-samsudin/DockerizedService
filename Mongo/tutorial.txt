@@ -1,0 +1,55 @@
+to connect:
+
+docker exec -it my_mongodb_container bash
+mongosh --host localhost:27017 -u admin -p admin_password --authenticationDatabase admin
+
+
+create database:
+use blog
+
+create collection/table:
+db.createCollection("posts")
+
+
+insert document to collection:
+db.posts.insertOne({
+  title: "Post Title 1",
+  body: "Body of post.",
+  category: "News",
+  likes: 1,
+  tags: ["news", "events"],
+  date: Date()
+})
+
+db.posts.insertMany([  
+  {
+    title: "Post Title 2",
+    body: "Body of post.",
+    category: "Event",
+    likes: 2,
+    tags: ["news", "events"],
+    date: Date()
+  },
+  {
+    title: "Post Title 3",
+    body: "Body of post.",
+    category: "Technology",
+    likes: 3,
+    tags: ["news", "events"],
+    date: Date()
+  },
+  {
+    title: "Post Title 4",
+    body: "Body of post.",
+    category: "Event",
+    likes: 4,
+    tags: ["news", "events"],
+    date: Date()
+  }
+])
+
+to list document in collection:
+db.posts.find()
+db.posts.findOne()
+
+to query

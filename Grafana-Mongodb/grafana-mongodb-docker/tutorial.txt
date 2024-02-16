@@ -1,0 +1,36 @@
+HTTP
+URL: http://localhost:3333
+
+Auth: Basic auth and With Credentials
+
+
+[  No Need To Configure
+    Basic Auth Details:
+    User: admin   
+    Password: admin_password
+]
+MongoDB URL: mongodb://admin:admin_password@192.168.1.15:27017/?authSource=admin
+             mongodb://admin:admin_password@192.168.1.15:27017
+MongoDB Database: test
+
+Example Record:
+
+test> db.posts.find()
+[
+  {
+    _id: ObjectId('65b9d8ce8e9ba73b951e66de'),
+    title: 'Post Title 1',
+    body: 'Body of post.',
+    category: 'News',
+    likes: 1,
+    tags: [ 'news', 'events' ],
+    date: 'Wed Jan 31 2024 05:21:18 GMT+0000 (Coordinated Universal Time)'
+  }
+]
+
+
+Example Grafana Query:
+
+db.posts.aggregate([
+    { $match: { category: {$eq: 'News' }}},
+])

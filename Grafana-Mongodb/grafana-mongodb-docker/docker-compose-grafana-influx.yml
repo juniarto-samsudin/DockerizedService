@@ -1,0 +1,35 @@
+version: "3"
+services:
+  mygrafana:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    #restart: always
+    container_name: mygrafana
+    volumes:
+     - ./data:/var/lib/grafana
+     - /var/lib/grafana/plugins #anonymously created by docker
+    ports:
+     - 3000:3000
+     - 3333:3333
+    networks:
+      snsnetwork:
+         ipv4_address: 192.168.100.2
+  myinfluxdb:
+    image: influxdb:2.7.5
+    container_name: myinfluxdb
+    #restart: unless-stopped
+    #volumes: 2 volumes are anonymously created by docker
+    #1 for /etc/influxdb and 1 for /var/lib/influxdb2
+    ports:
+     - '8086:8086'
+    networks:
+      snsnetwork:
+         ipv4_address: 192.168.100.3
+networks:
+  snsnetwork:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.100.0/24
